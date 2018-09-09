@@ -1,17 +1,46 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import {
+  View,
+  StatusBar,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 
+import PropTypes from 'prop-types';
 import styles from './styles';
 
-export default class Main extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as FavoritesActions from '../../store/actions/favorites';
+
+class Main extends Component {
 
   static navigationOptions = {
     header: null,
   };
 
+  static propType = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+    }).isRequired,
+    addFavoriteRequest: PropTypes.func.isRequired,
+  };
+
+  state = {
+    repoNameInput: '',
+  };
+
   navigateToFavorites = () => {
     this.props.navigation.navigate('Favorites');
-  }
+  };
+
+  addRepository = () => {
+    if (!this.state.repoNameInput.length) return;
+
+    this.props.addFavoriteRequest(this.state.repoNameInput);
+  };
 
   render() {
     return (
@@ -31,11 +60,13 @@ export default class Main extends Component {
               autoCorrect={false}
               placeholder='usuário/repositorio'
               underlineColorAndroid='transparent'
+              value={this.state.repoNameInput}
+              onChangeText={repoNameInput => this.setState({ repoNameInput })}
             />
 
             <TouchableOpacity
               style={styles.button}
-              onPress={() => { }}
+              onPress={this.addRepository}
               activeOpacity={0.6}
             >
               <Text style={styles.buttonText}>Adicionar aos favoritos </Text>
@@ -51,5 +82,11 @@ export default class Main extends Component {
 
       </SafeAreaView>
     );
-  }
-}
+  };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(FavoritesActions, dispatch);
+
+
+export default connect(null, mapDispatchToProps)(Main);

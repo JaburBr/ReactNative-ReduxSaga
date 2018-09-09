@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './store';
 
-
+import Routes from './routes';
 
 export default class App extends Component {
 
@@ -14,8 +14,7 @@ export default class App extends Component {
 
     return (
       <Provider store={store}>
-        <View style={{ flex: 1 }}>
-        </View>
+        <Routes />
       </Provider>
     );
   }

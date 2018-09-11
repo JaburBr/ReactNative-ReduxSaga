@@ -29,6 +29,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+  errorMessage: {
+    color: colors.danger,
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: 'bold',
+    marginBottom: metrics.baseMargin,
+    textAlign: 'center',
+  },
+
   form: {
     marginTop: metrics.baseMargin * 2,
     alignSelf: 'stretch',

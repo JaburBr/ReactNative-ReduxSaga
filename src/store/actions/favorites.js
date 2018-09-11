@@ -11,3 +11,17 @@ export const addFavoriteSuccess = repository => ({
     repository,
   },
 });
+
+export const addFavoriteError = message => ({
+  type: 'ADD_FAVORITE_ERROR',
+  payload: {
+    message,
+  },
+});
+
+export const setFavoriteLoading = loading => ({
+  type: 'SET_FAVORITE_LOADING',
+  payload: {
+    loading,
+  },
+});

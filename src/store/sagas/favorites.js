@@ -1,7 +1,7 @@
 import { call, put, select } from 'redux-saga/effects';
 import api from '../../services/api';
 
-import { addFavoriteSuccess, addFavoriteError, setFavoriteLoading } from '../actions/favorites';
+import { Creators as FavoritesActions } from '../ducks/favorites';
 
 export function* addFavoriteRequest(action) {
 
@@ -12,13 +12,12 @@ export function* addFavoriteRequest(action) {
     const favorites = yield select(state => state.favorites.data);
 
     if (favorites.find(favorite => favorite.id === response.data.id)) {
-      yield put(addFavoriteError('Repositorio duplicado'));
+      yield put(FavoritesActions.addFavoriteError('Repositorio duplicado'));
     } else {
-      yield put(addFavoriteSuccess(response.data));
+      yield put(FavoritesActions.addFavoriteSuccess(response.data));
     }
 
   } catch (error) {
-    yield put(addFavoriteError('Repositorio nao existe'));
-    yield put(setFavoriteLoading(false));
+    yield put(FavoritesActions.addFavoriteError('Repositorio nao existe'));
   }
 }

@@ -14,7 +14,7 @@ import styles from './styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as FavoritesActions from '../../store/actions/favorites';
+import { Creators as FavoritesActions } from '../../store/ducks/favorites';
 
 class Main extends Component {
 
@@ -45,7 +45,7 @@ class Main extends Component {
   };
 
   render() {
-    console.tron.log(!this.props.errorOnAdd);
+    console.tron.log(this.props);
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle='light-content' />
